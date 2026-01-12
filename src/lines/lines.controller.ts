@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { LinesService } from './lines.service';
 import { CreateLineDto } from './dto/create-line.dto';
+import { UpdateLineDto } from './dto/update-line.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('Lines')
+@ApiTags('lines')
 @Controller('lines')
 export class LinesController {
   constructor(private readonly linesService: LinesService) {}
@@ -21,9 +22,15 @@ export class LinesController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a specific line by ID' })
+  @ApiOperation({ summary: 'Get a production line by ID' })
   findOne(@Param('id') id: string) {
     return this.linesService.findOne(+id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a production line' })
+  update(@Param('id') id: string, @Body() updateLineDto: UpdateLineDto) {
+    return this.linesService.update(+id, updateLineDto);
   }
 
   @Delete(':id')
