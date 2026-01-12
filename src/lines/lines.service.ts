@@ -22,9 +22,9 @@ export class LinesService {
   }
 
   async findOne(id: number) {
-    const line = await this.lineRepository.findOne({ 
-      where: { id }, 
-      relations: ['products'] 
+    const line = await this.lineRepository.findOne({
+      where: { id },
+      relations: ['products'],
     });
     if (!line) throw new NotFoundException(`Line #${id} not found`);
     return line;
