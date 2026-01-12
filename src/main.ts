@@ -7,15 +7,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
 
-  // 1. Gelen verileri otomatik doğrulama (Validation)
+  app.enableCors();
+
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // DTO'da tanımlı olmayan fazlalık verileri otomatik siler
-      transform: true, // String gelen sayıları otomatik number'a çevirir
+      whitelist: true,
+      transform: true,
     }),
   );
 
-  // 2. Swagger (API Dokümantasyonu) Ayarları
   const config = new DocumentBuilder()
     .setTitle('Restful API Project')
     .setDescription('Optimization & Management API Documentation')
