@@ -5,9 +5,9 @@ import { LinesController } from './lines.controller';
 import { Line } from './entities/line.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Line])], 
+  imports: [TypeOrmModule.forFeature([Line])],
   controllers: [LinesController],
   providers: [LinesService],
-  exports: [LinesService]
+  exports: [LinesService],
 })
 export class LinesModule {}
